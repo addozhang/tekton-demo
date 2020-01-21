@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - image: "addozhang/tekton-test:latest"
-          imagePullPolicy: "IfNotPresent"
+          imagePullPolicy: "Always"
           livenessProbe:
             failureThreshold: 3
             httpGet:
