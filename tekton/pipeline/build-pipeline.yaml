@@ -30,8 +30,14 @@ spec:
         - name: git-source
           resource: git-source
   - name: deploy-to-k8s
+    runAfter:
+      - source-to-image
     taskRef:
       name: deploy-to-k8s
     params:
       - name: pathToYamlFile
         value: deployment.yaml
+    resources:
+      inputs:
+        - name: git-source
+          resource: git-source

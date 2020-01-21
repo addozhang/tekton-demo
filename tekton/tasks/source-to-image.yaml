@@ -40,13 +40,6 @@ spec:
         - --dockerfile=$(inputs.params.pathToDockerFile)
         - --destination=$(inputs.params.imageUrl):$(inputs.params.imageTag)
         - --context=/workspace/git-source/$(inputs.params.pathToContext)
-    # - name: sleep
-    #   image: alpine
-    #   workingDir: /workspace/git-source
-    #   command:
-    #     - sleep
-    #   args:
-    #     - 3600d        
   volumes:
     - name: m2
       hostPath:

@@ -8,13 +8,8 @@ spec:
     name: build-pipeline
   resources:
     - name: git-source
-      resourceSpec:
-        type: git
-        params: 
-          - name: revision
-            value: master
-          - name: url
-            value: https://github.com/addozhang/tekton-test.git
+      resourceRef:
+        name: git-source
   params:
     - name: imageUrl
       value: addozhang/tekton-test
