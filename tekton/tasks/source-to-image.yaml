@@ -43,4 +43,4 @@ spec:
   volumes:
     - name: m2
       hostPath:
-        path: /home/docker/.m2
+        path: /data/.m2
