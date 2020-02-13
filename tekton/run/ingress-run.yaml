@@ -1,0 +1,24 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TaskRun
+metadata:
+  name: create-ingress-run
+  namespace: tekton-pipelines
+spec:
+  taskRef:
+    name: create-ingress
+  inputs:
+    params:
+    - name: CreateCertificate
+      value: "false"
+    - name: CertificateKeyPassphrase
+      value: asecretphrase
+    - name: CertificateSecretName
+      value: ingresssecret
+    - name: ExternalDomain
+      value: trigger-test.el.nip.io
+    - name: Service
+      value: el-trigger-test-eventlistener
+    - name: ServicePort
+      value: "8080"
+  timeout: 1000s
+  serviceAccountName: tekton-test

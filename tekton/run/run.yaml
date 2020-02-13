@@ -8,8 +8,13 @@ spec:
     name: build-pipeline
   resources:
     - name: git-source
-      resourceRef:
-        name: git-source
+      resourceSpec:
+        type: git
+        params:
+          - name: revision
+            value: master
+          - name: url
+            value: http://gitlab.nip.io:8088/addozhang/tekton-test.git
   params:
     - name: imageUrl
       value: addozhang/tekton-test
