@@ -2,7 +2,7 @@ apiVersion: app.logancloud.com/v1
 kind: JavaBoot
 metadata:
   name: tekton-test
-  namespace: logan
+  namespace: tekton-pipelines
 spec:
   image: "addozhang/tekton-test"
   version: "latest"
