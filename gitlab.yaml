@@ -13,6 +13,6 @@ services:
       - '8088:8088'
       - '8022:22'
     volumes:
-      - '/tmp/gitlab/config:/etc/gitlab'
-      - '/tmp/gitlab/logs:/var/log/gitlab'
-      # - '/tmp/gitlab/data:/var/opt/gitlab'
+      - '/tmp/gitlab/config:/etc/gitlab:cached'
+      - '/tmp/gitlab/logs:/var/log/gitlab:cached'
+      # - '/tmp/gitlab/data:/var/opt/gitlab' #disable due to directory permission issue
