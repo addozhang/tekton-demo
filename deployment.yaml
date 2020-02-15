@@ -6,3 +6,4 @@ metadata:
 spec:
   image: "addozhang/tekton-test"
   version: "latest"
+  health: "/actuator/health"
