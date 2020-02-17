@@ -4,6 +4,6 @@ metadata:
   name: tekton-test
   namespace: logan
 spec:
-  image: "192.168.1.136/tekton-test"
+  image: "192.168.1.136:5000/tekton-test"
   version: "latest"
   health: "/actuator/health"
