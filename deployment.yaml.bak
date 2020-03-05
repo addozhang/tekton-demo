@@ -1,0 +1,9 @@
+apiVersion: app.logancloud.com/v1
+kind: JavaBoot
+metadata:
+  name: tekton-test
+  namespace: logan
+spec:
+  image: "192.168.64.1:5000/tekton-test"
+  version: "latest"
+  health: "/actuator/health"
