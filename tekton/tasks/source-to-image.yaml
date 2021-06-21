@@ -1,28 +1,25 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: source-to-image
 spec:
-  inputs:
-    resources:
-      - name: git-source
-        type: git
-    params:
-      - name: pathToContext
-        description: The path to the build context, used by Kaniko - within the workspace
-        default: .
-      - name: pathToDockerFile
-        description: The path to the dockerfile to build (relative to the context)
-        default: Dockerfile
-      - name: imageUrl
-        description: Url of image repository
-      - name: imageTag
-        description: Tag to apply to the built image
-        default: latest
+  params:
+    - name: pathToDockerFile
+      description: The path to the dockerfile to build (relative to the context)
+      default: Dockerfile
+    - name: imageUrl
+      description: Url of image repository
+    - name: imageTag
+      description: Tag to apply to the built image
+      default: latest
+  workspaces:
+    - name: source
+    - name: dockerconfig
+      mountPath: /kaniko/.docker
   steps:
     - name: maven
       image: maven:3.5.0-jdk-8-alpine
-      workingDir: /workspace/git-source
+      workingDir: $(workspaces.source.path)
       command:
         - mvn
       args:
@@ -37,9 +34,9 @@ spec:
       command:
         - /kaniko/executor
       args:
-        - --dockerfile=$(inputs.params.pathToDockerFile)
-        - --destination=$(inputs.params.imageUrl):$(inputs.params.imageTag)
-        - --context=/workspace/git-source/$(inputs.params.pathToContext)
+        - --dockerfile=$(params.pathToDockerFile)
+        - --destination=$(params.imageUrl):$(params.imageTag)
+        - --context=$(workspaces.source.path)
   volumes:
     - name: m2
       hostPath:
