@@ -1,21 +1,20 @@
-apiVersion: tekton.dev/v1alpha1
+apiVersion: tekton.dev/v1beta1
 kind: Task
 metadata:
   name: deploy-to-k8s
 spec:
-  inputs:
-    resources:
-      - name: git-source
-        type: git
-    params:
-      - name: pathToYamlFile
-        description: The path to the yaml file to deploy within the git source
-        default: deployment.yaml
+  params:
+    - name: pathToYamlFile
+      description: The path to the yaml file to deploy within the git source
+      default: deployment.yaml
+  workspaces:
+    - name: source
   steps:
     - name: run-kubectl
-      image: lachlanevenson/k8s-kubectl
+      image: lachlanevenson/k8s-kubectl:v1.21.1
+      imagePullPolicy: IfNotPresent
       command: ["kubectl"]
       args:
         - "apply"
         - "-f"
-        - "/workspace/git-source/$(inputs.params.pathToYamlFile)"
+        - "$(workspaces.source.path)/$(inputs.params.pathToYamlFile)"
