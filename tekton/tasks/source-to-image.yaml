@@ -12,13 +12,24 @@ spec:
     - name: imageTag
       description: Tag to apply to the built image
       default: latest
+    - name: IMAGE
+      description: Name (reference) of the image to build.      
+    - name: CHAINS-GIT_COMMIT
+      description: Commit value
+    - name: CHAINS-GIT_URL
+      description: Git repo URL     
   workspaces:
     - name: source
     - name: dockerconfig
       mountPath: /kaniko/.docker
+  results:
+    - name: IMAGE_DIGEST
+      description: Digest of the image just built.
+    - name: IMAGE_URL
+      description: URL of the image just built.
   steps:
     - name: maven
-      image: maven:3.5.0-jdk-8-alpine
+      image: maven:3.5-jdk-8-alpine
       imagePullPolicy: IfNotPresent
       workingDir: $(workspaces.source.path)
       command:
@@ -39,6 +50,12 @@ spec:
         - --dockerfile=$(params.pathToDockerFile)
         - --destination=$(params.imageUrl):$(params.imageTag)
         - --context=$(workspaces.source.path)
+        - --digest-file=$(results.IMAGE_DIGEST.path)
+    - name: write-url
+      image: bash
+      script: |
+        set -e
+        echo $(params.IMAGE) | tee $(results.IMAGE_URL.path)        
   volumes:
     - name: m2
       hostPath:

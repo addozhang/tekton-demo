@@ -34,8 +34,15 @@ spec:
       params:
         - name: imageUrl
           value: "$(params.imageUrl)"
+        - name: IMAGE  
+          value: "$(params.imageUrl)"
         - name: imageTag
           value: "$(params.imageTag)"
+        - name: CHAINS-GIT_COMMIT
+          value: "$(tasks.fetch-from-git.results.commit)"
+        - name: CHAINS-GIT_URL
+          value: "$(tasks.fetch-from-git.results.url)"
+
       workspaces:
         - name: source
           workspace: git-source
