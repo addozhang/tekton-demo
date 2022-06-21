@@ -10,7 +10,7 @@ spec:
     - name: git-revision
       value: main
     - name: git-url
-      value: https://github.com/addozhang/tekton-test.git  
+      value: https://github.com/addozhang/tekton-demo.git  
     - name: imageUrl
       value: addozhang/tekton-test
     - name: imageTag
