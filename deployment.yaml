@@ -4,6 +4,7 @@ metadata:
   labels:
     app: "tekton-test"
   name: "tekton-test"
+  namespace: "default"
 spec:
   replicas: 1
   selector:
