@@ -15,6 +15,6 @@ public class TektonTestApplication {
 
 	@GetMapping("/hi")
 	public String hello() {
-		return "hello world";
+		return "hello, devops";
 	}
 }
