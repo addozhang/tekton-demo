@@ -1,0 +1,17 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: tekton-demo
+  description: "Simple Java project for Tekton Pipeline Demo."
+  tags:
+    - tekton
+    - ci/cd
+    - demo
+    - java
+  annotations:
+    github.com/project-slug: addozhang/tekton-demo
+spec:
+  type: service
+  lifecycle: experimental
+  owner: addozhang
+  system: Demo
